@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-6">
       <h4>Total Risiko Aktif</h4>
-      <p><strong>120 Risiko</strong></p>
+      <p><strong></strong></p>
     </div>
     <div class="col-md-6">
       <h4>Risiko Berdasarkan Kategori</h4>

@@ -218,4 +218,23 @@ class Risk_model{
 
         return $data;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //home
+    public function resikoAktif(){
+        $this->db->query("SELECT COUNT(*) AS total FROM ".$this->table." WHERE kolom = 'nilai'"
+    );
+    return $this->db->resultSet();
+    }
 }

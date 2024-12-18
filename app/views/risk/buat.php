@@ -4,6 +4,8 @@
                   <input type="text" class="form-control" id="tujuan" name="tujuan">
                 </div>
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-6">
                   <label for="proses_bisnis">Proses bisnis</label>
                   <select class="form-select " id="proses_bisnis" name="proses_bisnis" aria-label="Default select example">
                     <option value="keuangan" selected>keuangan</option>
@@ -24,7 +26,7 @@
                     <option value="pengembangan bahasa">pengembangan bahasa</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="col-md-6">
                   <label for="risk_category">Kategori resiko</label>
                   <select class="form-select " id="risk_category" name="risk_category" aria-label="Default select example">
                     <option value="Finansial" selected>Finansial</option>
@@ -38,13 +40,21 @@
                     <option value="keselamatan">keselamatan</option>
                   </select>
                 </div>
-                <div class="form-group">
-                  <label for="uraian_resiko" class="form-label">Uraian resiko</label>
-                  <textarea class="form-control" id="uraian_resiko" name="uraian_resiko" rows="3"></textarea>
                 </div>
+                </div>
+                <!-- section -->
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-6">
+                  <label for="uraian_resiko" class="form-label">Uraian resiko</label>
+                  <textarea class="form-control" id="uraian_resiko" name="uraian_resiko" rows="2"></textarea>
+                </div>
+                <div class="col-md-6">
+
                   <label for="penyebab_resiko" class="form-label">Penyebab resiko</label>
-                  <textarea class="form-control" id="penyebab_resiko" name="penyebab_resiko" rows="3"></textarea>
+                  <textarea class="form-control" id="penyebab_resiko" name="penyebab_resiko" rows="2"></textarea>
+                </div>
+                </div>
                 </div>
                 <div class="form-group">
                   <label for="sumber_resiko">Kategori resiko</label>
@@ -57,20 +67,12 @@
                   <label for="kerugian_kualitatif" class="form-label">Kerugian kualitatif</label>
                   <textarea class="form-control" id="kerugian_kualitatif" name="kerugian_kualitatif" rows="3"></textarea>
                 </div>
+                
                 <div class="form-group">
-                  <label for="kerugian_finansial">Kerugian kerugian_finansial</label>
-                  <select class="form-select " id="kerugian_finansial" name="kerugian_finansial" aria-label="Default select example">
-                    <option value="Tidak ada" selected>Tidak ada</option>
-                    <option value="<=10 juta"><=10 juta</option>
-                    <option value="10 juta s/d 50 juta">10 juta s/d 50 juta</option>
-                    <option value="50 juta s/d 200 juta">50 juta s/d 200 juta</option>
-                    <option value="200 juta s/d 600 juta">200 juta s/d 400 juta</option>
-                    <option value=">600 juta">>600 juta</option>
-                  </select>
-                </div>
-                <div class="form-group">
+                <div class="row">
+                <div class="col-md-6">
                   <label for="pemilik_resiko">Pemilik resiko</label>
-                  <select class="form-select " id="risk_category" name="risk_category" aria-label="Default select example">
+                  <select class="form-select " id="pemilik_resiko" name="pemilik_resiko" aria-label="Default select example">
                     <option value="satuan pengawas internal" selected>satuan pengawas internal</option>
                     <option value="keuangan dan akuntasi" selected>keuangan dan akuntasi</option>
                     <option value="organisasi, kepegawaian, dan hukum">organisasi, kepegawaian, dan hukum</option>
@@ -84,11 +86,15 @@
                     <option value="pengembangan bahasa">pengembangan bahasa</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="col-md-6">
                   <label for="unit_terkait">Unit terkait</label>
                   <input type="text" class="form-control" id="unit_terkait" name="unit_terkait">
                 </div>
+                </div>
+                </div>
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-6">
                   <label for="inherit_likelihood">kemungkinan terjadi sebelum mitigasi</label>
                   <select class="form-select " id="inherit_likelihood" name="inherit_likelihood" aria-label="Default select example">
                     <option value="1" selected>Maksimum 1 kali dalam sebulan</option>
@@ -98,7 +104,7 @@
                     <option value="5">Lebih dari 20 kali dalam sebulan</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="col-md-6">
                   <label for="inherit_impact">dampak resiko sebelum mitigasi</label>
                   <select class="form-select " id="inherit_impact" name="inherit_impact" aria-label="Default select example">
                     <option value="1" selected><=10 juta</option>
@@ -108,32 +114,40 @@
                     <option value="5">>600 juta</option>
                   </select>
                 </div>
+                </div>
+                </div>
                 <!-- <div class="form-group">
                   <label for="inherit_level">level resiko sebelum mitigasi</label>
                   <input type="number" id="inherit_level" name="inherit_level" min="1" max="25" required>
                 </div> -->
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-4">
                   <label for="pengendalian_ada">Apakah ada pengendalian</label>
                   <select class="form-select " id="pengendalian_ada" name="pengendalian_ada" aria-label="Default select example">
                     <option value="Ada" selected>Ada</option>
                     <option value="Tidak">Tidak</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="col-md-4">
                   <label for="pengendalian_sudah">Apakah sudah memadai</label>
                   <select class="form-select " id="pengendalian_sudah" name="pengendalian_sudah" aria-label="Default select example">
                     <option value="Memadai" selected>Memadai</option>
                     <option value="Belum">Belum memadai</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="col-md-4">
                   <label for="pengendalian_max">Apakah sudah maksimal</label>
                   <select class="form-select " id="pengendalian_max" name="pengendalian_max" aria-label="Default select example">
                     <option value="Dijalankan 100%" selected>Dijalankan 100%</option>
                     <option value="Belum 100%">Belum dijalankan 100%</option>
                   </select>
                 </div>
+                </div>
+                </div>
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-6">
                   <label for="residual_likelihood">kemungkinan terjadi setelah mitigasi</label>
                   <select class="form-select " id="residual_likelihood" name="residual_likelihood" aria-label="Default select example">
                     <option value="1" selected>Maksimum 1 kali dalam sebulan</option>
@@ -143,7 +157,7 @@
                     <option value="5">Lebih dari 20 kali dalam sebulan</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="col-md-6">
                   <label for="residual_impact">Dampak resiko setelah mitigasi</label>
                   <select class="form-select " id="residual_impact" name="residual_impact" aria-label="Default select example">
                     <option value="1" selected><=10 juta</option>
@@ -152,6 +166,8 @@
                     <option value="4">200 juta s/d 600 juta</option>
                     <option value="5">>600 juta</option>
                   </select>
+                </div>
+                </div>
                 </div>
                 <!-- <div class="form-group">
                   <label for="residual_level">level resiko setelah mitigasi</label>
@@ -166,9 +182,11 @@
                 </div>
                 <div class="form-group">
                   <label for="trait_desc">deskripsi tindakan mitigasi</label>
-                  <textarea class="form-control" id="trait_desc" name="trait_desc" rows="3"></textarea>
+                  <textarea class="form-control" id="trait_desc" name="trait_desc" rows="2"></textarea>
                 </div>
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-6">
                   <label for="target_likelihood">kemungkinan terjadi setelah mitigasi lanjutan</label>
                   <select class="form-select " id="target_likelihood" name="target_likelihood" aria-label="Default select example">
                     <option value="1" selected>Maksimum 1 kali dalam sebulan</option>
@@ -178,7 +196,7 @@
                     <option value="5">Lebih dari 20 kali dalam sebulan</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="col-md-6">
                   <label for="target_impact">Dampak resiko setelah mitigasi lanjutan</label>
                   <select class="form-select " id="target_impact" name="target_impact" aria-label="Default select example">
                     <option value="1" selected><=10 juta</option>
@@ -188,13 +206,17 @@
                     <option value="5">>600 juta</option>
                   </select>
                 </div>
+                </div>
+                </div>
                 <!-- <div class="form-group">
                   <label for="target_level">level resiko setelah mitigasi lanjutan</label>
                   <input type="number" id="target_level" name="target_level" min="1" max="25" required>
                 </div> -->
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save changes</button>
+                <div class="form-group mt-4">
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+                  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
             </form>
 </div>
-
-
