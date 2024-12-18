@@ -30,6 +30,7 @@ class Login extends Controller{
                     // Periksa apakah password cocok
                     if ($password === $data['user']['password']) {
                         $_SESSION['user_id'] = $data['user']['id'];
+                        $_SESSION['role'] = $data['user']['role'];
                         // Redirect ke halaman utama setelah login berhasil
                         header("Location: " . BASEURL . '/index.php');
                         exit;  // Jangan lupa exit setelah header
@@ -40,10 +41,11 @@ class Login extends Controller{
                     }
                 } else {
                     header("Location: " . BASEURL . '/index.php');
-                        exit;
+                    exit;
                 }
             } else {
-                echo "Email dan password harus diisi!";
+                header("Location: " . BASEURL . '/index.php');
+                exit;
             }
         }
     }

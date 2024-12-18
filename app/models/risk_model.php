@@ -13,9 +13,20 @@ class Risk_model{
     }
     
     public function result_analisis() {
-        $this->db->query("SELECT * FROM " . $this->table. " WHERE user_id= :user_id ");
-        $this->db->bind(":user_id", $_SESSION['user_id']);
-        return $this->db->resultSet();
+        if($_SESSION['role'] == 'admin' ){
+            $this->db->query("SELECT * FROM " . $this->table);
+            return $this->db->resultSet();
+        }elseif($_SESSION['role'] == 'pemilik_resiko'){
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE pemilik_resiko= :pemilik_resiko OR user_id= :user_id ");
+            $this->db->bind(":pemilik_resiko", $_SESSION['role']);
+            $this->db->bind(":user_id", $_SESSION['user_id']);
+            return $this->db->resultSet();
+        }else{
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE user_id= :user_id ");
+            $this->db->bind(":user_id", $_SESSION['user_id']);
+            return $this->db->resultSet();
+        }
+        
     }
     // public function getRisks() {
     //     $this->db->query("SELECT * FROM ". $this->table);
@@ -24,7 +35,7 @@ class Risk_model{
     
         public function tambahRisk($risk) {
             // Validasi data
-            $requiredKeys = ['tujuan', 'proses_bisnis', 'risk_category', 'uraian_resiko', 'penyebab_resiko', 'sumber_resiko', 'kerugian_kualitatif', 'kerugian_finansial', 'pemilik_resiko', 'unit_terkait', 'inherit_likelihood', 'inherit_impact',  'pengendalian_ada', 'pengendalian_sudah', 'pengendalian_max', 'residual_likelihood', 'residual_impact', 'trait_risk', 'trait_desc', 'target_likelihood', 'target_impact',];
+            $requiredKeys = ['tujuan', 'proses_bisnis', 'risk_category', 'uraian_resiko', 'penyebab_resiko', 'sumber_resiko', 'kerugian_kualitatif', 'pemilik_resiko', 'unit_terkait', 'inherit_likelihood', 'inherit_impact',  'pengendalian_ada', 'pengendalian_sudah', 'pengendalian_max', 'residual_likelihood', 'residual_impact', 'trait_risk', 'trait_desc', 'target_likelihood', 'target_impact',];
             foreach ($requiredKeys as $key) {
                 if (!isset($risk[$key])) {
                     throw new Exception("Missing key in risk array: $key");
@@ -33,9 +44,9 @@ class Risk_model{
         
             // Query SQL
             $query = "INSERT INTO risk_management 
-            (user_id, tujuan, proses_bisnis, risk_category, uraian_resiko, penyebab_resiko, sumber_resiko, kerugian_kualitatif, kerugian_finansial, pemilik_resiko, unit_terkait, inherit_likelihood, inherit_impact, inherit_level, pengendalian_ada, pengendalian_sudah, pengendalian_max, residual_likelihood, residual_impact, residual_level, trait_risk, trait_desc, target_likelihood, target_impact, target_level)
+            (user_id, tujuan, proses_bisnis, risk_category, uraian_resiko, penyebab_resiko, sumber_resiko, kerugian_kualitatif,  pemilik_resiko, unit_terkait, inherit_likelihood, inherit_impact, inherit_level, pengendalian_ada, pengendalian_sudah, pengendalian_max, residual_likelihood, residual_impact, residual_level, trait_risk, trait_desc, target_likelihood, target_impact, target_level)
             VALUES 
-            (:user_id, :tujuan, :proses_bisnis, :risk_category, :uraian_resiko, :penyebab_resiko, :sumber_resiko, :kerugian_kualitatif, :kerugian_finansial, :pemilik_resiko, :unit_terkait, :inherit_likelihood, :inherit_impact, :inherit_level, :pengendalian_ada, :pengendalian_sudah, :pengendalian_max, :residual_likelihood, :residual_impact, :residual_level, :trait_risk, :trait_desc, :target_likelihood, :target_impact, :target_level)";
+            (:user_id, :tujuan, :proses_bisnis, :risk_category, :uraian_resiko, :penyebab_resiko, :sumber_resiko, :kerugian_kualitatif,  :pemilik_resiko, :unit_terkait, :inherit_likelihood, :inherit_impact, :inherit_level, :pengendalian_ada, :pengendalian_sudah, :pengendalian_max, :residual_likelihood, :residual_impact, :residual_level, :trait_risk, :trait_desc, :target_likelihood, :target_impact, :target_level)";
             $this->db->query($query);
         
             // Binding data
@@ -50,7 +61,6 @@ class Risk_model{
             $this->db->bind('penyebab_resiko', $risk['penyebab_resiko']);
             $this->db->bind('sumber_resiko', $risk['sumber_resiko']);
             $this->db->bind('kerugian_kualitatif', $risk['kerugian_kualitatif']);
-            $this->db->bind('kerugian_finansial', $risk['kerugian_finansial']);
             $this->db->bind('pemilik_resiko', $risk['pemilik_resiko']);
             $this->db->bind('unit_terkait', $risk['unit_terkait']);
             $this->db->bind('inherit_likelihood', $risk['inherit_likelihood']);
@@ -90,7 +100,7 @@ class Risk_model{
     }
     public function ubahRisk($data) {
         // Validasi data
-        $requiredKeys = ['tujuan', 'proses_bisnis', 'risk_category', 'uraian_resiko', 'penyebab_resiko', 'sumber_resiko', 'kerugian_kualitatif', 'kerugian_finansial', 'pemilik_resiko', 'unit_terkait', 'inherit_likelihood', 'inherit_impact', 'pengendalian_ada', 'pengendalian_sudah', 'pengendalian_max', 'residual_likelihood', 'residual_impact', 'trait_risk', 'trait_desc', 'target_likelihood', 'target_impact'];
+        $requiredKeys = ['tujuan', 'proses_bisnis', 'risk_category', 'uraian_resiko', 'penyebab_resiko', 'sumber_resiko', 'kerugian_kualitatif',  'pemilik_resiko', 'unit_terkait', 'inherit_likelihood', 'inherit_impact', 'pengendalian_ada', 'pengendalian_sudah', 'pengendalian_max', 'residual_likelihood', 'residual_impact', 'trait_risk', 'trait_desc', 'target_likelihood', 'target_impact'];
         foreach ($requiredKeys as $key) {
             if (!isset($data[$key])) {
                 throw new Exception("Missing key in data array: $key");
@@ -113,7 +123,6 @@ class Risk_model{
             penyebab_resiko = :penyebab_resiko,
             sumber_resiko = :sumber_resiko,
             kerugian_kualitatif = :kerugian_kualitatif,
-            kerugian_finansial = :kerugian_finansial,
             pemilik_resiko = :pemilik_resiko,
             unit_terkait = :unit_terkait,
             inherit_likelihood = :inherit_likelihood,
@@ -145,7 +154,6 @@ class Risk_model{
         $this->db->bind('penyebab_resiko', $data['penyebab_resiko']);
         $this->db->bind('sumber_resiko', $data['sumber_resiko']);
         $this->db->bind('kerugian_kualitatif', $data['kerugian_kualitatif']);
-        $this->db->bind('kerugian_finansial', $data['kerugian_finansial']);
         $this->db->bind('pemilik_resiko', $data['pemilik_resiko']);
         $this->db->bind('unit_terkait', $data['unit_terkait']);
         $this->db->bind('inherit_likelihood', $data['inherit_likelihood']);

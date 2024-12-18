@@ -9,8 +9,7 @@
                   <label for="password" class="form-label">Password</label>
                   <input type="password" class="form-control" id="password" name="password">
                 </div>
-                <button type="submit" class="btn btn-primary" name= "submit">Submit</button>
-                
+                <button type="submit" class="btn btn-primary" name= "submit">Submit</button>              
               </form>
             </div>
       </div>
