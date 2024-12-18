@@ -1,0 +1,108 @@
+/* Umum */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Kolom Card untuk Dashboard */
+.col-md-6 {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.col-md-6 h4 {
+    margin-bottom: 10px;
+}
+
+/* Pie Chart dan Bar Chart */
+canvas {
+    max-width: 100%;
+    height: 200px;
+}
+
+/* Button Aksi Cepat */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-right: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Card untuk Risiko Tertinggi */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+ul li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #007bff;
+    font-size: 20px;
+    top: 0;
+}
+
+/* Desain Responsif */
+@media (max-width: 768px) {
+    .col-md-6 {
+        width: 100%;
+    }
+    .btn {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
