@@ -18,7 +18,7 @@ class Risk_model{
             return $this->db->resultSet();
         }elseif($_SESSION['role'] == 'pemilik_resiko'){
             $this->db->query("SELECT * FROM " . $this->table. " WHERE pemilik_resiko= :pemilik_resiko OR user_id= :user_id ");
-            $this->db->bind(":pemilik_resiko", $_SESSION['role']);
+            $this->db->bind(":pemilik_resiko", $_SESSION['username']);
             $this->db->bind(":user_id", $_SESSION['user_id']);
             return $this->db->resultSet();
         }else{

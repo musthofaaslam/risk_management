@@ -6,9 +6,22 @@
                 <div class="form-group">
                   <label for="proses_bisnis">Proses bisnis</label>
                   <select class="form-select " id="proses_bisnis" name="proses_bisnis" aria-label="Default select example">
-                    <option value="Keuangan" selected>Keuangan</option>
-                    <option value="Akademik">Akademik</option>
+                    <option value="keuangan" selected>keuangan</option>
+                    <option value="oraganisasi">oraganisasi</option>
                     <option value="Kepegawaian">kepegawaian</option>
+                    <option value="hukum">hukum</option>
+                    <option value="rumah tangga">rumah tangga</option>
+                    <option value="tata usaha">tata usaha</option>
+                    <option value="akademik">akademik</option>
+                    <option value="perencanaan">perencanaan</option>
+                    <option value="kemahasiswaan">kemahasiswaan</option>
+                    <option value="alumni">alumni</option>
+                    <option value="kerjasama">kerjasama</option>
+                    <option value="kelembagaan">kelembagaan</option>
+                    <option value="penelitian">penelitian</option>
+                    <option value="pengabdian">pengabdian</option>
+                    <option value="teknologi informasi">teknologi informasi</option>
+                    <option value="pengembangan bahasa">pengembangan bahasa</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -57,7 +70,19 @@
                 </div>
                 <div class="form-group">
                   <label for="pemilik_resiko">Pemilik resiko</label>
-                  <input type="text" class="form-control" id="pemilik_resiko" name="pemilik_resiko">
+                  <select class="form-select " id="risk_category" name="risk_category" aria-label="Default select example">
+                    <option value="satuan pengawas internal" selected>satuan pengawas internal</option>
+                    <option value="keuangan dan akuntasi" selected>keuangan dan akuntasi</option>
+                    <option value="organisasi, kepegawaian, dan hukum">organisasi, kepegawaian, dan hukum</option>
+                    <option value="rumah tangga">rumah tangga</option>
+                    <option value="tata usaha">tata usaha</option>
+                    <option value="akademik">akademik</option>
+                    <option value="kemahasiswaan">kemahasiswaan</option>
+                    <option value="kerjasama dan kelembagaan">kerjasama dan kelembagaan</option>
+                    <option value="lembaga penelitian dan pengabdian masyarakat">lembaga penelitian dan pengabdian masyarakat</option>
+                    <option value="pusat teknologi dan informasi">pusat teknologi dan informasi</option>
+                    <option value="pengembangan bahasa">pengembangan bahasa</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="unit_terkait">Unit terkait</label>

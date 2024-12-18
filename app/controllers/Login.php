@@ -31,6 +31,7 @@ class Login extends Controller{
                     if ($password === $data['user']['password']) {
                         $_SESSION['user_id'] = $data['user']['id'];
                         $_SESSION['role'] = $data['user']['role'];
+                        $_SESSION['username'] = $data['user']['username'];
                         // Redirect ke halaman utama setelah login berhasil
                         header("Location: " . BASEURL . '/index.php');
                         exit;  // Jangan lupa exit setelah header
