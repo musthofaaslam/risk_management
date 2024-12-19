@@ -1,15 +1,24 @@
-      <div class="card" style="width: 18rem;margin : 15% auto">
-        <div class="card-body">
-            <form action="<?=BASEURL;?>/login/auth" method="post">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <button type="submit" class="btn btn-primary" name= "submit">Submit</button>              
-              </form>
-            </div>
+      <link rel="stylesheet" href="<?=BASEURL;?>/css/slide.css" >
+  </head>
+  <body>
+    <div class="main">
+      <input type="checkbox" id="chk" aria-hidden="true" >
+      <div class="signup">
       </div>
+      <div class="login">
+        <form action="<?=BASEURL;?>/login/auth" method="post">
+          <label for="chk" aria-hidden="true">Login</label>
+          <input type="email" name="email" id="email" placeholder="Email" required autocomplete="off" />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+            autocomplete="off"
+          />
+          <button type="submit" name="submit">Login</button>
+        </form>
+        </>
+      </div>
+    </div>

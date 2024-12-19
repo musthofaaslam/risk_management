@@ -49,3 +49,22 @@
     </div>
   </div>
 </div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Kolom Kiri -->
+        <div class="col-lg-6 col-md-12">
+            <div class="p-3 bg-light">
+                <h1>Bagian Kiri</h1>
+                <p>Konten bagian kiri halaman.</p>
+            </div>
+        </div>
+
+        <!-- Kolom Kanan -->
+        <div class="col-lg-6 col-md-12">
+            <div class="p-3 bg-secondary text-white">
+                <h1>Bagian Kanan</h1>
+                <p>Konten bagian kanan halaman.</p>
+            </div>
+        </div>
+    </div>
+</div>

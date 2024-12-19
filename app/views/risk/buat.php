@@ -1,7 +1,7 @@
 <form action="<?=BASEURL;?>/risk/identifikasi" method="post">
                 <div class="form-group">
                   <label for="tujuan" class="form-label">Tujuan</label>
-                  <input type="text" class="form-control" id="tujuan" name="tujuan">
+                  <input type="text" class="form-control" id="tujuan" name="tujuan" required autocomplete="off">
                 </div>
                 <div class="form-group">
                 <div class="row">
@@ -47,12 +47,12 @@
                 <div class="row">
                 <div class="col-md-6">
                   <label for="uraian_resiko" class="form-label">Uraian resiko</label>
-                  <textarea class="form-control" id="uraian_resiko" name="uraian_resiko" rows="2"></textarea>
+                  <textarea class="form-control" id="uraian_resiko" name="uraian_resiko" rows="2" required autocomplete="off"></textarea>
                 </div>
                 <div class="col-md-6">
 
                   <label for="penyebab_resiko" class="form-label">Penyebab resiko</label>
-                  <textarea class="form-control" id="penyebab_resiko" name="penyebab_resiko" rows="2"></textarea>
+                  <textarea class="form-control" id="penyebab_resiko" name="penyebab_resiko" rows="2" required autocomplete="off"></textarea>
                 </div>
                 </div>
                 </div>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="form-group">
                   <label for="kerugian_kualitatif" class="form-label">Kerugian kualitatif</label>
-                  <textarea class="form-control" id="kerugian_kualitatif" name="kerugian_kualitatif" rows="3"></textarea>
+                  <textarea class="form-control" id="kerugian_kualitatif" name="kerugian_kualitatif" rows="2" required autocomplete="off"></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-md-6">
                   <label for="unit_terkait">Unit terkait</label>
-                  <input type="text" class="form-control" id="unit_terkait" name="unit_terkait">
+                  <input type="text" class="form-control" id="unit_terkait" name="unit_terkait" required autocomplete="off">
                 </div>
                 </div>
                 </div>
@@ -182,7 +182,7 @@
                 </div>
                 <div class="form-group">
                   <label for="trait_desc">deskripsi tindakan mitigasi</label>
-                  <textarea class="form-control" id="trait_desc" name="trait_desc" rows="2"></textarea>
+                  <textarea class="form-control" id="trait_desc" name="trait_desc" rows="2" required autocomplete="off"></textarea>
                 </div>
                 <div class="form-group">
                 <div class="row">

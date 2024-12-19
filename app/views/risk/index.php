@@ -3,18 +3,13 @@
         <?php Flasher::flash();?>
     </div>
 </div>
-
-<button type="submit" class="btn btn-primary" href = "<?=BASEURL;?>/risk/identifikasi">
-        Launch demo modal
-</button>
-      
 <a href="<?=BASEURL;?>/risk/buat">Tambah resiko</a>
-<?php foreach( $data['identity'] as $identity) :?>
+<!-- <?php foreach( $data['identity'] as $identity) :?>
         <p><?=$identity['username'];?></p>
         <p><?=$identity['role'];?></p>
         <p><?=$identity['email'];?></p>
         <p><?=$identity['jabatan'];?></p>
-<?php endforeach;?>
+<?php endforeach;?> -->
 <h2>analisis</h2>
 <?php foreach( $data['analisis'] as $analisis) :?>
         <p><?=$analisis['tujuan'];?></p>
