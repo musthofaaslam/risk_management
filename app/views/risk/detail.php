@@ -12,7 +12,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?=BASEURL;?>/js/grafik.js"></script>
-
 <style>
 #chartdiv {
   width: 100%;

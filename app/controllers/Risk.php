@@ -1,7 +1,6 @@
 <?php
 class Risk extends Controller{
     public function index(){
-        
         if (!isset($_SESSION['user_id'])) {
             header("Location: " . BASEURL . "/login");
             exit;
@@ -15,7 +14,7 @@ class Risk extends Controller{
         $this->view('templates/footer');
     }
     public function buat(){
-                if (!isset($_SESSION['user_id'])) {
+            if (!isset($_SESSION['user_id'])) {
             header("Location: " . BASEURL . "/login");
             exit;
         }
@@ -26,7 +25,6 @@ class Risk extends Controller{
         $this->view('templates/footer');
     }
     public function identifikasi(){
-        
         if($this->model('risk_model')->tambahRisk($_POST) > 0){
             Flasher::setFlash('berhasil', 'ditambahkan', 'success');
             header("Location: ". BASEURL. "/risk/index");
@@ -54,8 +52,7 @@ class Risk extends Controller{
         $this->view('templates/header');
         $this->view('templates/navbar', $data);
         $this->view('risk/ubah', $data);
-        $this->view('templates/footer');
-        
+        $this->view('templates/footer');   
     }
     public function updated(){
         if($this->model('risk_model')->ubahRisk($_POST) > 0){
@@ -71,15 +68,9 @@ class Risk extends Controller{
     public function detail($id){
         $data['analisis'] = $this->model('risk_model')->getUserAnalisis($id);
         $data['chart'] = $this->model('risk_model')->getRiskData($id);
-
-        // Kirim data ke view
         echo '<script>const chartData = ' . json_encode($data['chart']) . ';</script>';
-        // $this->view('risk/bubbleChart', ['data' => $data]);
-        // $data['mitigasi'] = $this->model('analisis_model')->getUserMitigasi();//error
         $this->view('templates/header');
         $this->view('risk/detail', $data);
         $this->view('templates/footer');
     }
-    
-    
 }

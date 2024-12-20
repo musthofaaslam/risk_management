@@ -1,0 +1,120 @@
+*,
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #f0f8ff;
+  min-height: 2000px;
+}
+nav {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  position: fixed;
+  width: 100%;
+}
+nav .navbar_logo h1 {
+  margin-bottom: 0px;
+  line-height: 15px;
+  margin-top: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 900;
+}
+nav .navbar_logo h2 {
+  margin-top: 10px;
+  line-height: 15px;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 0px;
+}
+nav ul li a {
+  text-decoration: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #191919;
+  font-weight: 700;
+  padding: 4px 0;
+  transition: all;
+  font-size: large;
+  margin-bottom: 0px;
+  display: flex;
+}
+nav ul li:hover {
+  text-emphasis-color: #213555;
+  padding: 0.1px;
+  transition: 1s;
+  border-bottom: 1px solid #213555;
+  color: #213555;
+}
+nav ul li a:hover {
+  color: #2c7dff;
+  transition: 1s;
+}
+.container h1 {
+  margin-top: 50px;
+  box-sizing: border-box;
+}
+.login .kotak {
+  border: solid #213555;
+  border-radius: 20px;
+  text-align: center;
+  margin: 10px;
+}
+.login .kotak p {
+  color: #3e5879;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(23, 40, 68, 0.8), rgba(84, 145, 245, 0.8)),
+    url("https://source.unsplash.com/1920x1080/?business,technology") no-repeat
+      center center/cover;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: 100px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+/* Grid Styling */
+.row > .col-md-6 {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: #214e98;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #213555;
+  color: #f9f9f9;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #214e98;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 50px;
+}

@@ -217,24 +217,64 @@ class Risk_model{
         }
 
         return $data;
+    // }public function getLevel() {
+    //     // Query untuk mengambil inherit_level berdasarkan user_id
+    //     // $query = "SELECT inherit_likelihood FROM " . $this->table . " WHERE user_id = :user_id";
+    //     // $this->db->query($query);
+    //     // $this->db->bind(':user_id', $_SESSION['user_id']);
+    //     if($_SESSION['role'] == 'admin' ){
+    //         $this->db->query("SELECT * FROM " . $this->table);
+    //         return $this->db->resultSet();
+    //     }elseif($_SESSION['role'] == 'pemilik_resiko'){
+    //         $this->db->query("SELECT * FROM " . $this->table. " WHERE pemilik_resiko= :pemilik_resiko OR user_id= :user_id ");
+    //         $this->db->bind(":pemilik_resiko", $_SESSION['username']);
+    //         $this->db->bind(":user_id", $_SESSION['user_id']);
+    //         return $this->db->resultSet();
+    //     }else{
+    //         $this->db->query("SELECT * FROM " . $this->table. " WHERE user_id= :user_id ");
+    //         $this->db->bind(":user_id", $_SESSION['user_id']);
+    //         return $this->db->resultSet();
+    //     }
+        
+    //     // Ambil hasil query
+    //     $result = $this->db->resultSet();
+        
+    //     // Siapkan data untuk output
+    //     $data = [
+    //         'level' => []
+    //     ];
+        
+    //     foreach ($result as $row) {
+    //         // Masukkan level ke dalam array
+    //         $data['level'][] = (int) $row['inherit_likelihood'];
+    //     }
+        
+    //     // Kembalikan data yang telah diolah
+    //     return $data;
+    // } 
+    }public function getLevel() {
+        $data = ['level' => []];
+        
+        if ($_SESSION['role'] == 'admin') {
+            $this->db->query("SELECT inherit_likelihood FROM " . $this->table);
+        } elseif ($_SESSION['role'] == 'pemilik_resiko') {
+            $this->db->query("SELECT inherit_likelihood FROM " . $this->table . " WHERE pemilik_resiko = :pemilik_resiko OR user_id = :user_id");
+            $this->db->bind(":pemilik_resiko", $_SESSION['username']);
+            $this->db->bind(":user_id", $_SESSION['user_id']);
+        } else {
+            $this->db->query("SELECT inherit_likelihood FROM " . $this->table . " WHERE user_id = :user_id");
+            $this->db->bind(":user_id", $_SESSION['user_id']);
+        }
+        
+        $result = $this->db->resultSet();
+    
+        foreach ($result as $row) {
+            if (isset($row['inherit_likelihood'])) {
+                $data['level'][] = (int) $row['inherit_likelihood'];
+            }
+        }
+    
+        return $data;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //home
-    public function resikoAktif(){
-        $this->db->query("SELECT COUNT(*) AS total FROM ".$this->table." WHERE kolom = 'nilai'"
-    );
-    return $this->db->resultSet();
-    }
+       
 }

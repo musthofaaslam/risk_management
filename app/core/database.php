@@ -42,10 +42,6 @@ class Database{
                     $type = PDO::PARAM_STR;
             }
         }
-    
-        // Debugging: Pastikan $value bukan array atau objek yang salah
-         // Debug nilai yang dikirimkan
-    
         $this->stmt->bindValue($param, $value, $type);
     }
     

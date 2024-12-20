@@ -6,7 +6,9 @@ class Home extends Controller{
             header("Location: " . BASEURL . "/login");
             exit;
         }
-        $data = $this->model('risk_model');
+        $data['analisis'] = $this->model('risk_model')->result_analisis();
+        $data['tingkat'] = $this->model('risk_model')->getLevel();
+        echo '<script>const chartData = ' . json_encode($data['tingkat']['level']) . ';</script>';
         // $data['resiko'] = $this->model('risk_model')->resikoAktif();
         $this->view('templates/header');
         $this->view('templates/navbar', $data);
