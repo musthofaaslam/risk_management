@@ -85,10 +85,22 @@ class Risk_model{
         
     }
     public function getUserAnalisis($id) {
-        $this->db->query("SELECT * FROM " . $this->table. " WHERE id= :id AND user_id= :user_id");
-        $this->db->bind(":user_id", $_SESSION['user_id']);
-        $this->db->bind(":id", $id);
-        return $this->db->resultSet();
+        if($_SESSION['role'] == 'admin' ){
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE id= :id");
+            $this->db->bind("id", $id);
+            return $this->db->resultSet();
+        }elseif($_SESSION['role'] == 'pemilik_resiko'){
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE pemilik_resiko= :pemilik_resiko OR user_id= :user_id AND id= :id");
+            $this->db->bind(":pemilik_resiko", $_SESSION['username']);
+            $this->db->bind(":user_id", $_SESSION['user_id']);
+            $this->db->bind("id", $id);
+            return $this->db->resultSet();
+        }else{
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE id= :id AND user_id= :user_id");
+            $this->db->bind(":user_id", $_SESSION['user_id']);
+            $this->db->bind(":id", $id);
+            return $this->db->resultSet();
+        }
     }
     public function hapusData($id){
         $query = "DELETE FROM " .$this->table. " WHERE id = :id";
@@ -217,64 +229,77 @@ class Risk_model{
         }
 
         return $data;
-    // }public function getLevel() {
-    //     // Query untuk mengambil inherit_level berdasarkan user_id
-    //     // $query = "SELECT inherit_likelihood FROM " . $this->table . " WHERE user_id = :user_id";
-    //     // $this->db->query($query);
-    //     // $this->db->bind(':user_id', $_SESSION['user_id']);
-    //     if($_SESSION['role'] == 'admin' ){
-    //         $this->db->query("SELECT * FROM " . $this->table);
-    //         return $this->db->resultSet();
-    //     }elseif($_SESSION['role'] == 'pemilik_resiko'){
-    //         $this->db->query("SELECT * FROM " . $this->table. " WHERE pemilik_resiko= :pemilik_resiko OR user_id= :user_id ");
-    //         $this->db->bind(":pemilik_resiko", $_SESSION['username']);
-    //         $this->db->bind(":user_id", $_SESSION['user_id']);
-    //         return $this->db->resultSet();
-    //     }else{
-    //         $this->db->query("SELECT * FROM " . $this->table. " WHERE user_id= :user_id ");
-    //         $this->db->bind(":user_id", $_SESSION['user_id']);
-    //         return $this->db->resultSet();
-    //     }
-        
-    //     // Ambil hasil query
-    //     $result = $this->db->resultSet();
-        
-    //     // Siapkan data untuk output
-    //     $data = [
-    //         'level' => []
-    //     ];
-        
-    //     foreach ($result as $row) {
-    //         // Masukkan level ke dalam array
-    //         $data['level'][] = (int) $row['inherit_likelihood'];
-    //     }
-        
-    //     // Kembalikan data yang telah diolah
-    //     return $data;
-    // } 
     }public function getLevel() {
-        $data = ['level' => []];
+        $data = ['inherit' => [], 'residual' => [], 'target' => []];
         
-        if ($_SESSION['role'] == 'admin') {
-            $this->db->query("SELECT inherit_likelihood FROM " . $this->table);
-        } elseif ($_SESSION['role'] == 'pemilik_resiko') {
-            $this->db->query("SELECT inherit_likelihood FROM " . $this->table . " WHERE pemilik_resiko = :pemilik_resiko OR user_id = :user_id");
-            $this->db->bind(":pemilik_resiko", $_SESSION['username']);
-            $this->db->bind(":user_id", $_SESSION['user_id']);
-        } else {
-            $this->db->query("SELECT inherit_likelihood FROM " . $this->table . " WHERE user_id = :user_id");
-            $this->db->bind(":user_id", $_SESSION['user_id']);
-        }
+        // Query untuk mengambil 3 level sekaligus
+        $this->db->query("SELECT inherit_level, residual_level, target_level FROM " . $this->table);
         
+        // Ambil hasilnya
         $result = $this->db->resultSet();
     
+        // Proses hasil query dan masukkan ke dalam array data
         foreach ($result as $row) {
-            if (isset($row['inherit_likelihood'])) {
-                $data['level'][] = (int) $row['inherit_likelihood'];
-            }
+            $data['inherit'][] = (int) $row['inherit_level'];
+            $data['residual'][] = (int) $row['residual_level'];
+            $data['target'][] = (int) $row['target_level'];
+        }
+    
+        return $data;
+    }    
+    public function getCategory() {
+        $data = [];
+        
+        // Query untuk mengambil 3 level sekaligus
+        $this->db->query("SELECT risk_category FROM " . $this->table);
+        
+        // Ambil hasilnya
+        $result = $this->db->resultSet();
+    
+        // Proses hasil query dan masukkan ke dalam array data
+        foreach ($result as $row) {
+            $data[] = $row['risk_category'];
+        }
+        return $data;
+    }    
+    public function getPemilik() {
+        $data = [];
+        
+        // Query untuk mengambil 3 level sekaligus
+        $this->db->query("SELECT pemilik_resiko FROM " . $this->table);
+        
+        // Ambil hasilnya
+        $result = $this->db->resultSet();
+    
+        // Proses hasil query dan masukkan ke dalam array data
+        foreach ($result as $row) {
+            $data[] = $row['pemilik_resiko'];
+        }
+        return $data;
+    } 
+    
+    public function getImpact() {
+        $data = ['inherit' => [], 'residual' => [], 'target' => []];
+        
+        // Query untuk mengambil 3 level sekaligus
+        $this->db->query("SELECT inherit_impact, residual_impact, target_impact FROM " . $this->table);
+        
+        // Ambil hasilnya
+        $result = $this->db->resultSet();
+    
+        // Proses hasil query dan masukkan ke dalam array data
+        foreach ($result as $row) {
+            $data['inherit'][] = (int) $row['inherit_impact'];
+            $data['residual'][] = (int) $row['residual_impact'];
+            $data['target'][] = (int) $row['target_impact'];
         }
     
         return $data;
     }
-       
+    //home
+    public function totalBarisResiko(){
+        $sql = "SELECT COUNT(*) AS total_rows FROM risk_management";
+        $this->db->query($sql);
+        return $this->db->single()['total_rows'];
+    }
 }

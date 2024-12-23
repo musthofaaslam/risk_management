@@ -1,11 +1,16 @@
-<form action="<?=BASEURL;?>/risk/identifikasi" method="post">
+<link rel="stylesheet" href="<?=BASEURL;?>/css/form.css" />
+<form action="<?=BASEURL;?>/risk/identifikasi" method="post">         
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-12" >
                   <label for="tujuan" class="form-label">Tujuan</label>
                   <input type="text" class="form-control" id="tujuan" name="tujuan" required autocomplete="off">
                 </div>
+                </div>
+                </div>
                 <div class="form-group">
                 <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" >
                   <label for="proses_bisnis">Proses bisnis</label>
                   <select class="form-select " id="proses_bisnis" name="proses_bisnis" aria-label="Default select example">
                     <option value="keuangan" selected>keuangan</option>
@@ -50,22 +55,29 @@
                   <textarea class="form-control" id="uraian_resiko" name="uraian_resiko" rows="2" required autocomplete="off"></textarea>
                 </div>
                 <div class="col-md-6">
-
                   <label for="penyebab_resiko" class="form-label">Penyebab resiko</label>
                   <textarea class="form-control" id="penyebab_resiko" name="penyebab_resiko" rows="2" required autocomplete="off"></textarea>
                 </div>
                 </div>
                 </div>
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-12" >
                   <label for="sumber_resiko">Kategori resiko</label>
                   <select class="form-select " id="sumber_resiko" name="sumber_resiko" aria-label="Default select example">
                     <option value="Internal" selected>Internal</option>
                     <option value="Eksternal">Eksternal</option>
                   </select>
                 </div>
+                </div>
+                </div>
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-12" >
                   <label for="kerugian_kualitatif" class="form-label">Kerugian kualitatif</label>
                   <textarea class="form-control" id="kerugian_kualitatif" name="kerugian_kualitatif" rows="2" required autocomplete="off"></textarea>
+                </div>
+                </div>
                 </div>
                 
                 <div class="form-group">
@@ -174,15 +186,23 @@
                   <input type="number" id="residual_level" name="residual_level" min="1" max="25" required>
                 </div> -->
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-12" >
                   <label for="trait_risk">Opsi perlakuan resiko</label>
                   <select class="form-select " id="trait_risk" name="trait_risk" aria-label="Default select example">
                     <option value="Accept" selected>Accept</option>
                     <option value="Reduce">Reduce</option>
                   </select>
                 </div>
+                </div>
+                </div>
                 <div class="form-group">
+                <div class="row">
+                <div class="col-md-12" >
                   <label for="trait_desc">deskripsi tindakan mitigasi</label>
                   <textarea class="form-control" id="trait_desc" name="trait_desc" rows="2" required autocomplete="off"></textarea>
+                </div>
+                </div>
                 </div>
                 <div class="form-group">
                 <div class="row">
@@ -216,7 +236,3 @@
     <div class="d-flex justify-content-end">
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-  </div>
-                  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-            </form>
-</div>

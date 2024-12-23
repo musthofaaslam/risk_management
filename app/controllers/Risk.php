@@ -70,6 +70,7 @@ class Risk extends Controller{
         $data['chart'] = $this->model('risk_model')->getRiskData($id);
         echo '<script>const chartData = ' . json_encode($data['chart']) . ';</script>';
         $this->view('templates/header');
+        $this->view('templates/navbar');
         $this->view('risk/detail', $data);
         $this->view('templates/footer');
     }

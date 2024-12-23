@@ -7,63 +7,57 @@ class Risk_mitigasi{
     {
         $this->db = new Database;
     }
-    public function getUser() {
-        $this->db->query("SELECT * FROM " . $this->table);
-        return $this->db->single();
-    }
-    
-    public function result_analisis() {
-        $this->db->query("SELECT * FROM " . $this->table. " WHERE user_mit= :user_mit ");
-        $this->db->bind(":user_mit", $_SESSION['user_id']);
-        return $this->db->resultSet();
-    }
-    // public function getRisks() {
-    //     $this->db->query("SELECT * FROM ". $this->table);
-    //     return $this->db->resultSet();
-    // }
-    
-    //     
-    public function tambahRisk($risk) {
-    // Validasi data
-    $requiredKeys = ['risk_event', 'rencana_mitigasi', 'bulan', 'evidence', 'risk_owner'];
-    foreach ($requiredKeys as $key) {
-        if (!isset($risk[$key])) {
-            throw new Exception("Missing key in risk array: $key");
+    public function result_mitigasi() {
+        if($_SESSION['role'] == 'admin' ){
+            $this->db->query("SELECT * FROM " . $this->table);
+            return $this->db->resultSet();
+        }elseif($_SESSION['role'] == 'pemilik_resiko'){
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE pemilik_resiko= :pemilik_resiko OR user_mit= :user_mit ");
+            $this->db->bind(":pemilik_resiko", $_SESSION['username']);
+            $this->db->bind(":user_mit", $_SESSION['user_id']);
+            return $this->db->resultSet();
+        }else{
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE user_mit= :user_mit ");
+            $this->db->bind(":user_mit", $_SESSION['user_id']);
+            return $this->db->resultSet();
         }
     }
-
-    // Jika 'bulan' adalah array, ubah menjadi string
-    if (is_array($risk['bulan'])) {
-        $risk['bulan'] = implode(',', $risk['bulan']);
-        $risk['eksekusi'] = implode(',', $risk['eksekusi']);
-    }
-
-    // Query SQL
-    $query = "INSERT INTO risk_mitigasi 
-    (user_mit, risk_event, rencana_mitigasi, bulan,eksekusi, evidence, risk_owner)
-    VALUES 
-    (:user_mit, :risk_event, :rencana_mitigasi, :bulan,:eksekusi, :evidence, :risk_owner)";
-    $this->db->query($query);
-
-    // Binding data
-    $this->db->bind('user_mit', $_SESSION['user_id']);
-    $this->db->bind('risk_event', $risk['risk_event']);
-    $this->db->bind('rencana_mitigasi', $risk['rencana_mitigasi']);
-    $this->db->bind('bulan', $risk['bulan']); // Sudah string
-    $this->db->bind('eksekusi', $risk['eksekusi']); // Sudah string
-    $this->db->bind('evidence', $risk['evidence']); // Sudah string
-    $this->db->bind('risk_owner', $risk['risk_owner']);
-
-    // Eksekusi dan return hasil
-    $this->db->execute();
-    return $this->db->rowCount();
-}
-
-    public function getUserAnalisis($id) {
-        $this->db->query("SELECT * FROM " . $this->table. " WHERE id= :id AND user_id= :user_id");
-        $this->db->bind(":user_id", $_SESSION['user_id']);
-        $this->db->bind(":id", $id);
-        return $this->db->resultSet();
+    public function tambahMitigasi($mitigasi) {
+        // Validasi data
+        $requiredKeys = ['risk_event', 'rencana_mitigasi', 'bulan', 'eksekusi', 'evidence', 'pemilik_resiko'];
+        foreach ($requiredKeys as $key) {
+            if (!isset($mitigasi[$key])) {
+                throw new Exception("Missing key in mitigasi array: $key");
+            }
+        }
+    
+        // Menangani jika bulan berupa array (checkbox)
+        // Misalnya, bulan disimpan dalam format string yang dipisahkan koma
+        $bulan = is_array($mitigasi['bulan']) ? implode(',', $mitigasi['bulan']) : $mitigasi['bulan'];
+        $eksekusi = is_array($mitigasi['eksekusi']) ? implode(',', $mitigasi['eksekusi']) : $mitigasi['eksekusi'];
+    
+        // Query SQL
+        $query = "INSERT INTO risk_mitigasi 
+        (user_mit, risk_event, rencana_mitigasi, bulan, eksekusi, evidence, pemilik_resiko)
+        VALUES 
+        (:user_mit, :risk_event, :rencana_mitigasi, :bulan, :eksekusi, :evidence, :pemilik_resiko)";
+        
+        $this->db->query($query);
+    
+        // Binding data
+        $this->db->bind('user_mit', $_SESSION['user_id']);
+        $this->db->bind('risk_event', $mitigasi['risk_event']);
+        $this->db->bind('rencana_mitigasi', $mitigasi['rencana_mitigasi']);
+        $this->db->bind('bulan', $bulan);  // Menggunakan string bulan yang sudah diolah
+        $this->db->bind('eksekusi', $eksekusi);
+        $this->db->bind('evidence', $mitigasi['evidence']);
+        $this->db->bind('pemilik_resiko', $mitigasi['pemilik_resiko']);
+    
+        // Eksekusi dan return hasil
+        $this->db->execute();
+    
+        // Mengembalikan jumlah baris yang terpengaruh oleh query
+        return $this->db->rowCount();   
     }
     public function hapusData($id){
         $query = "DELETE FROM " .$this->table. " WHERE id = :id";
@@ -73,45 +67,69 @@ class Risk_mitigasi{
         $this->db->execute();
         return $this->db->rowCount();
     }
-    public function ubahData($id){
-        $ubah = "";
-        $this->db->query($ubah);
-    }
-    public function getRiskData() {
-        // Query untuk mengambil data dari tabel 'risk_model'
-        $sql = "SELECT inherit_likelihood, inherit_impact, inherit_level,
-                       residual_likelihood, residual_impact, residual_level,
-                       target_likelihood, target_impact, target_level
-                FROM " .$this->table;
-        $result = $this->db->query($sql);
-        $result = $this->db->resultSet();
-        $data = [
-            'inherit' => [],
-            'residual' => [],
-            'target' => []
-        ];
-
-        foreach( $result as $row) {
-            // Ambil data untuk inherit
-            $data['inherit'][] = [
-                'x' => $row['inherit_likelihood'],
-                'y' => $row['inherit_impact'],
-                'r' => $row['inherit_level']
-            ];
-            // Ambil data untuk residual
-            $data['residual'][] = [
-                'x' => $row['residual_likelihood'],
-                'y' => $row['residual_impact'],
-                'r' => $row['residual_level']
-            ];
-            // Ambil data untuk target
-            $data['target'][] = [
-                'x' => $row['target_likelihood'],
-                'y' => $row['target_impact'],
-                'r' => $row['target_level']
-            ];
+    public function getUserMitigasi($id) {
+        if($_SESSION['role'] == 'admin' ){
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE id= :id");
+            $this->db->bind("id", $id);
+            return $this->db->resultSet();
+        }elseif($_SESSION['role'] == 'pemilik_resiko'){
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE pemilik_resiko= :pemilik_resiko OR user_mit= :user_mit AND id= :id");
+            $this->db->bind(":pemilik_resiko", $_SESSION['username']);
+            $this->db->bind(":user_mit", $_SESSION['user_id']);
+            $this->db->bind("id", $id);
+            return $this->db->resultSet();
+        }else{
+            $this->db->query("SELECT * FROM " . $this->table. " WHERE id= :id AND user_mit= :user_mit");
+            $this->db->bind(":user_mit", $_SESSION['user_id']);
+            $this->db->bind(":id", $id);
+            return $this->db->resultSet();
         }
-
-        return $data;
     }
+    public function ubahMitigasi($data) {
+        // Validasi data
+        $requiredKeys = ['risk_event', 'rencana_mitigasi', 'bulan', 'eksekusi', 'evidence', 'pemilik_resiko'];
+        foreach ($requiredKeys as $key) {
+            if (!isset($data[$key])) {
+                throw new Exception("Missing key in data array: $key");
+            }
+        }
+    
+        // Menangani array bulan dan eksekusi (checkbox)
+        $bulan = is_array($data['bulan']) ? implode(',', $data['bulan']) : $data['bulan'];
+        $eksekusi = is_array($data['eksekusi']) ? implode(',', $data['eksekusi']) : $data['eksekusi'];
+    
+        // Query SQL untuk UPDATE
+        $query = "UPDATE risk_mitigasi SET
+            user_mit = :user_mit,
+            risk_event = :risk_event,
+            rencana_mitigasi = :rencana_mitigasi,
+            bulan = :bulan,
+            eksekusi = :eksekusi,
+            evidence = :evidence,
+            pemilik_resiko = :pemilik_resiko
+        WHERE id = :id";  // Pastikan 'WHERE id' untuk update berdasarkan id
+    
+        // Eksekusi Query
+        $this->db->query($query);
+    
+        // Bind data ke query
+        $this->db->bind('id', $data['id']); // Pastikan 'id' ada di $data
+        $this->db->bind('user_mit', $_SESSION['user_id']);
+        $this->db->bind('risk_event', $data['risk_event']);
+        $this->db->bind('rencana_mitigasi', $data['rencana_mitigasi']);
+        $this->db->bind('bulan', $bulan);  // Menggunakan string bulan yang sudah diolah
+        $this->db->bind('eksekusi', $eksekusi);  // Menggunakan string eksekusi yang sudah diolah
+        $this->db->bind('evidence', $data['evidence']);
+        $this->db->bind('pemilik_resiko', $data['pemilik_resiko']);
+    
+        // Eksekusi dan kembalikan hasil
+        $this->db->execute();
+        return $this->db->rowCount();  // Mengembalikan jumlah baris yang terpengaruh (diperbarui)
+    }    
+    //home
+    public function totalBarisMitigasi(){
+        $sql = "SELECT COUNT(*) AS total_rows FROM risk_mitigasi";
+        $this->db->query($sql);
+        return $this->db->single()['total_rows'];
+    } 
 }

@@ -1,7 +1,7 @@
 /* Umum */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f7fc;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
 }
@@ -13,7 +13,9 @@ body {
 .row {
     margin-bottom: 20px;
 }
-
+h3{
+    color: #f9f9f9;
+}
 h4 {
     font-size: 18px;
     font-weight: 600;
