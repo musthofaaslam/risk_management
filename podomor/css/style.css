@@ -1,0 +1,173 @@
+/* General Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #e0f7fa; /* Softer aqua tone for better readability */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #004d40; /* Darker, more calming tone */
+  margin-bottom: 1rem;
+}
+
+h3, .fw-bold {
+  font-weight: bold;
+  color: #004d40;
+}
+
+p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+th{
+  text-align: center;
+}
+.mt-3 {
+  margin-top: 1.5rem !important;
+}
+
+.mt-5 {
+  margin-top: 3rem !important;
+}
+
+/* Pomodoro Timer */
+.podomoro-container {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* margin-bottom: 20px; */
+}
+
+.podomoro-container h2 {
+  color: #00796b;
+}
+
+#status {
+  color: #43a047;
+  font-weight: bold;
+}
+
+#timerDisplay {
+  font-size: 2.5rem;
+  color: #004d40;
+  margin: 10px 0;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-primary {
+  background-color: #00796b;
+  color: white;
+}
+
+button.btn-primary:hover {
+  background-color: #004d40;
+}
+
+button.btn-secondary {
+  background-color: #78909c;
+  color: white;
+}
+
+button.btn-secondary:hover {
+  background-color: #546e7a;
+}
+
+/* To-Do List */
+.todo-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.todo-container h2 {
+  color: #00796b;
+}
+
+.todo-container input[type="text"] {
+  flex-grow: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.todo-container button.btn-success {
+  background-color: #43a047;
+  color: white;
+}
+
+.todo-container button.btn-success:hover {
+  background-color: #2e7d32;
+}
+
+.todo-container ul {
+  margin-top: 15px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.todo-container ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.todo-container ul li button {
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #e53935;
+  color: white;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.todo-container ul li button:hover {
+  background-color: #b71c1c;
+}
+.todo-container table tr td:last-child {
+  text-align: center;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .podomoro-container, .todo-container {
+    padding: 15px;
+  }
+
+  .todo-container input[type="text"] {
+    width: 100%;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
